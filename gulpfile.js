@@ -1,32 +1,31 @@
 /* NPM modules and imports:
  ****************************************/
 
-var gulp = require('gulp'),
-  newer = require('gulp-newer'),
-  concat = require('gulp-concat'),
-  preprocess = require('gulp-preprocess'),
-  htmlclean = require('gulp-htmlclean'),
-  imagemin = require('gulp-imagemin'),
-  imacss = require('gulp-imacss'),
-  sass = require('gulp-sass'),
-  pleeease = require('gulp-pleeease'),
-  jshint = require('gulp-jshint'),
-  deporder = require('gulp-deporder'),
-  stripdebug = require('gulp-strip-debug'),
-  uglify = require('gulp-uglify'),
-  size = require('gulp-size'),
-  del = require('del'),
-  browsersync = require('browser-sync'),
-  pkg = require('./package.json');
+var browsersync = require('browser-sync'),
+    concat = require('gulp-concat'),
+    del = require('del'),
+    es6transpiler = require('gulp-es6-transpiler'),
+    gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    htmlclean = require('gulp-htmlclean'),
+    js_obfuscator = require('gulp-js-obfuscator'),
+    jshint = require('gulp-jshint'),
+    minify = require('gulp-minify'),
+    newer = require('gulp-newer'),
+    pkg = require('./package.json'),
+    pleeease = require('gulp-pleeease'),
+    preprocess = require('gulp-preprocess'),
+    sass = require('gulp-sass'),
+    size = require('gulp-size'),
+    stripdebug = require('gulp-strip-debug'),
+    uglify = require('gulp-uglify');
 
 
 /* File locations:
  ****************************************/
 
 var devBuild = ((process.env.NODE_ENV || 'development').trim().toLowerCase() !== 'production'),
-
   // Do not use absolute ./paths - watch fails to detect new and deleted files
-
   source = 'source/',
   dest = 'build/',
   html = {
@@ -39,22 +38,9 @@ var devBuild = ((process.env.NODE_ENV || 'development').trim().toLowerCase() !==
       version: pkg.version
     }
   },
-
-  images = {
-    in: source + 'images/*.*',
-    out: dest + 'images/'
-  },
-
-  imguri = {
-    in: source + 'images/inline/*',
-    out: source + 'scss/images/',
-    filename: '_datauri.scss',
-    namespace: 'img'
-  },
-
   css = {
     in: source + 'scss/main.scss',
-    watch: [source + 'scss/**/*', '!' + imguri.out + imguri.filename],
+    watch: [source + 'scss/**/*'],
     out: dest + 'css/',
     sassOpts: {
       outputStyle: 'nested',
@@ -70,18 +56,11 @@ var devBuild = ((process.env.NODE_ENV || 'development').trim().toLowerCase() !==
       minifier: !devBuild
     }
   },
-
-  fonts = {
-    in: source + 'fonts/*.*',
-    out: css.out + 'fonts/'
-  },
-
   js = {
     in: source + 'js/**/*',
     out: dest + 'js/',
-    filename: 'main.js'
+    filename: 'bundle.js'
   },
-
   syncOpts = {
     server: {
       baseDir: dest,
@@ -101,11 +80,7 @@ console.log(pkg.name + ' ' + pkg.version + ', ' + (devBuild ? 'development' : 'p
 /* Task: "clean" (deletes build contents):
  ****************************************/
 
-gulp.task('clean', function() {
-  del([
-    dest + '*'
-  ]);
-});
+gulp.task('clean', function() { del([dest + '*']); });
 
 
 /* Task: "html" (builds HTML files):
@@ -123,43 +98,10 @@ gulp.task('html', function() {
 });
 
 
-/* Task: "images" (optimize images):
- ****************************************/
-
-gulp.task('images', function() {
-  return gulp.src(images.in)
-    .pipe(newer(images.out))
-    .pipe(imagemin())
-    .pipe(gulp.dest(images.out));
-});
-
-
-/* Task: "imguri" (convert inline images
-   to data URIs in a SCSS file):
- ****************************************/
-
-gulp.task('imguri', function() {
-  return gulp.src(imguri.in)
-    .pipe(imagemin())
-    .pipe(imacss(imguri.filename, imguri.namespace))
-    .pipe(gulp.dest(imguri.out));
-});
-
-
-/* Task: "fonts" (output fonts):
- ****************************************/
-
-gulp.task('fonts', function() {
-  return gulp.src(fonts.in)
-  .pipe(newer(fonts.out))
-  .pipe(gulp.dest(fonts.out));
-});
-
-
 /* Task: "sass" (compile Sass):
  ****************************************/
 
-gulp.task('sass', ['imguri'], function() {
+gulp.task('sass', function() {
   return gulp.src(css.in)
     .pipe(sass(css.sassOpts))
     .pipe(size({title:'CSS in '}))
@@ -183,15 +125,46 @@ gulp.task('js', function() {
       .pipe(gulp.dest(js.out));
   }
   else {
-    del([
-      dest + 'js/*'
-    ]);
-    return gulp.src(js.in)
-      .pipe(size({ title:'JS in' }))
-      .pipe(deporder())
+    del([ dest + 'js/*' ]);
+    return gulp.src([
+        source + 'js/settings/symbols.js',
+        source + 'config.js',
+        source + 'js/settings/globals.js',
+        source + 'js/components/helpers/create-element.js',
+        source + 'js/components/screens/end-screen/generate-feedback.js',
+        source + 'js/components/helpers/check-code.js',
+        source + 'js/components/helpers/toggle-ul-padding.js',
+        source + 'js/components/screens/end-screen/populate-cells.js',
+        source + 'js/components/screens/end-screen/populate-table-cells.js',
+        source + 'js/components/screens/end-screen/populate-table-header.js',
+        source + 'js/components/screens/end-screen/generate-results-table.js',
+        source + 'js/components/helpers/timer.js',
+        source + 'js/components/screens/question-screen/check-user-answered.js',
+        source + 'js/components/helpers/alert-msg.js',
+        source + 'js/components/screens/end-screen/generate-end-screen.js',
+        source + 'js/components/helpers/determine-which-screen.js',
+        source + 'js/components/screens/question-screen/submit-question.js',
+        source + 'js/components/helpers/reset.js',
+        source + 'js/components/helpers/elems-dom.js',
+        source + 'js/components/helpers/fade.js',
+        source + 'js/components/helpers/hide.js',
+        source + 'js/components/helpers/fade-in.js',
+        source + 'js/components/helpers/update-percentage-bar.js',
+        source + 'js/components/screens/question-screen/generate-question.js',
+        source + 'js/components/helpers/append-to-dom.js',
+        source + 'js/components/screens/question-screen/update-questions-correct-value.js',
+        source + 'js/components/screens/question-screen/question-set.js',
+        source + 'js/components/screens/question-screen/question-screen.js',
+        source + 'js/components/screens/title-screen/title-screen.js',
+        source + 'js/app.js'
+      ])
       .pipe(concat(js.filename))
+      .pipe(size({ title:'JS in' }))
+      .pipe(es6transpiler())
       .pipe(stripdebug())
-      .pipe(uglify())
+      .pipe(uglify().on('error', gutil.log))
+      .pipe(minify({ ext:{ src:'-debug.js', min:'.js' }, exclude: ['tasks'], ignoreFiles: ['.combo.js', '-min.js'] }))
+      .pipe(js_obfuscator({}, ["**/jquery-*.js"]))
       .pipe(size({ title:'JS out' }))
       .pipe(gulp.dest(js.out));
   }
@@ -201,29 +174,14 @@ gulp.task('js', function() {
 /* Task: "browsersync" (browsersync config):
  ****************************************/
 
-gulp.task('browsersync', function() {
-  browsersync(syncOpts);
-});
+gulp.task('browsersync', function() { browsersync(syncOpts); });
 
 
 /* Task: "default" (default task(s)):
  ****************************************/
 
-gulp.task('default', ['html', 'images', 'fonts', 'sass', 'js', 'browsersync'], function() {
-
-  // html changes
+gulp.task('default', ['html', 'sass', 'js', 'browsersync'], function() {
   gulp.watch(html.watch, ['html', browsersync.reload]);
-
-  // image changes
-  gulp.watch(images.in, ['images']);
-
-  // font changes
-  gulp.watch(fonts.in, ['fonts']);
-
-  // sass and inline image changes
-  gulp.watch([css.watch, imguri.in], ['sass']);
-
-  // javascript changes
+  gulp.watch(css.watch, ['sass']);
   gulp.watch(js.in, ['js', browsersync.reload]);
 });
-

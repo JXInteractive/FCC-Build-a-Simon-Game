@@ -1,50 +1,158 @@
-// base styles
-body, table, input, textarea, select {
-  font-family: $base-font-standard;
-  font-size: $base-font-size;
-  font-weight: 400;
-  @include reset;
-  color: $color-text;
-  background-color: $color-back;
+a {
+  color: $color-hyperlink;
 }
 
-h1, h2, h3 {
-  font-weight: 700;
-  line-height: 1.1;
-  margin: 1em 0 0.2em 0;
+body {
+  background-color: $color-background;
+  color: $color-darkest;
 }
 
-h1 {
-  font-size: 10vmin;
+.btn {
+  border-radius: 0 !important;
+  color: $color-background;
+  font-weight: 300;
 }
 
-h2 {
-  font-size: 1.4rem;
+.btn-primary, .btn-default {
+  background-color: $color-btn-primary;
+  border: $border-btn;
 }
 
-h3 {
-  font-size: 1.1rem;
+.btn-primary:focus, .btn-default:focus {
+  background-color: $color-btn-primary-active;
+  border: $border-btn;
+  color: $color-background;
 }
 
-a:link, a:visited {
-  text-decoration: none;
-  color: $color-main;
+.btn-primary:hover, .btn-default:hover {
+  background-color: $color-btn-primary-active;
+  border: $border-btn;
+  color: $color-background;
 }
 
-a:hover, a:focus, a:active {
-  text-decoration: underline;
-  color: $color-light;
+.btn-primary:active, .btn-default:active {
+  background-color: $color-btn-primary-active;
+  border: 1px solid $color-background;
 }
 
-// custom fonts
-.wf-active {
+.btn-primary:active:focus {
+  background-color: $color-btn-primary-active;
+  border: $border-btn;
+}
 
-  body, table, input, textarea, select {
-    font-family: $base-font-custom;
+button, input[type=radio], li {
+  cursor: pointer;
+}
+
+.container {
+  margin-top: 48px;
+}
+
+.elem-answers-div {
+  background-color: $color-background;
+  font-weight: $font-weight-standard;
+  height: 180px;
+  margin-bottom: 30px;
+  overflow: scroll;
+  position: relative;
+}
+
+.elem-container-border {
+  border: 0px solid $color-highlight;
+  padding: 0;
+}
+
+.elem-footer {
+  font-size: 10px;
+  padding-top: 10px;
+}
+
+.elem-h1-title-screen {
+  font-size: 40px;
+  text-align: center;
+}
+
+.elem-h2-title-screen {
+  font-size: 25px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.elem-hud-text {
+  font-size: 11px;
+}
+
+.elem-mid-div {
+  border: 0px solid $color-darkest;
+  height: 65px;
+  width: 100%; 
+}
+
+.elem-page-header {
+  border-bottom: 0px solid $color-highlight;
+  margin: 10px 0 0px;
+  padding-bottom: 9px;
+}
+
+.elem-timer {
+  padding: 0;
+  text-align: right;
+}
+
+.elem-ul-ans {
+  font-size: 14px;
+  font-weight: $font-weight-standard;
+  margin-bottom: 35px;
+}
+
+input[type=radio] {
+  margin-right: 10px;
+}
+
+li {
+  font-weight: $font-weight-standard;
+  list-style-type: none;
+  padding: 10px;
+}
+
+li:hover, tr:nth-child(even) {
+  background-color: $color-highlight;
+}
+
+.progress {
+  background-color: $color-progress;
+  height: 2px;
+}
+
+table {
+  background: none;
+}
+
+.table-results-container {
+  border-collapse: separate;
+  border-spacing: 0px;
+  font-size: 12px;
+  font-weight: $font-weight-standard;
+}
+
+.table-results-container td {
+  font-weight: $font-weight-standard;
+  height: 5px;
+  padding: 5px;
+  width: 33%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.vertical-center {
+  vertical-align: middle;
+}
+
+
+@media (max-width: 520px) {
+  .elem-h2-title-screen {
+    font-size: 22px;
   }
-
-  h1, h2, h3, legend, button, a.button {
-    font-family: $head-font-custom;
-  }
-
 }
