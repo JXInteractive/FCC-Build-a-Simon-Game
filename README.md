@@ -14,10 +14,10 @@ This is a quiz app (no interesting name yet) I developed in JavaScript — files
 
 ### 2. Generation
 ----
- Mac/Unix users:
+Mac/Unix users:
   - Launch the executable "build.sh" file to build "node_modules" and "build" directory (wait a couple of minutes for dependencies to download).
  
- Windows users:
+Windows users:
    - Open Command Prompt and "cd" into the project directory
    - Enter the following:
    - ```sh
@@ -36,6 +36,6 @@ This is a quiz app (no interesting name yet) I developed in JavaScript — files
 ----
 
 
-Go ahead and publish your project. I've issued a standard MIT license. This means there's very few restrictions in how its used/modified/distributed/etc. Although I would appreciate some credit in copyright/license notices in copies of your software. Thank you!
+Go ahead and publish your project. I've issued a standard MIT license. This means there's very few restrictions in how it's used/modified/distributed/etc. Although I would appreciate some credit in copyright/license notices in copies of your software. Thank you!
 
 For more information, contact: johnjamesmartin@live.com.
