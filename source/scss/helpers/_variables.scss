@@ -1,21 +1,29 @@
-/* Colours:
+/* Borders (for guidelines (make 0px in production))
  ***************************/
 
-$color-main: #337AB7;
+$border-guide: 0px solid;
+
+
+/* Shades:
+ ***************************/
+
 $color-darkest: #000;
+$color-dark: #222;
+$color-lightest: #FFF;
+$color-mid: #CCC;
 
-$color-background: lighten( $color-main, 60% );
-$color-btn-primary: $color-main;
-$color-btn-primary-active: lighten( $color-btn-primary, 10% );
-$color-highlight: lighten( $color-btn-primary, 50% );
-$color-hyperlink: $color-main;
-$color-progress: lighten( $color-btn-primary, 50% );
 
-/* Misc CSS:
+/* Coloured-keys/btns:
  ***************************/
-$border-radius-none: 0px;
-$border-btn: 1px solid darken( $color-btn-primary, 10% );
 
-/* Font CSS:
- ***************************/
-$font-weight-standard: 300;
+$color-key-blue: #0000FF;
+$color-key-blue-light: 	#00FFFF;
+
+$color-key-green: #008000;
+$color-key-green-light: #00FF00;
+
+$color-key-red: #FF0000;
+$color-key-red-light: #FFB6C1;
+
+$color-key-yellow: #FFFF00;
+$color-key-yellow-light: #FFFFE0;

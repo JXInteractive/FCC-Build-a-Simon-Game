@@ -1,158 +1,153 @@
-a {
-  color: $color-hyperlink;
-}
-
 body {
-  background-color: $color-background;
-  color: $color-darkest;
+  background-color: #FFF;
+  background-image: url("https://www.transparenttextures.com/patterns/tiny-grid.png");
 }
 
-.btn {
-  border-radius: 0 !important;
-  color: $color-background;
-  font-weight: 300;
-}
-
-.btn-primary, .btn-default {
-  background-color: $color-btn-primary;
-  border: $border-btn;
-}
-
-.btn-primary:focus, .btn-default:focus {
-  background-color: $color-btn-primary-active;
-  border: $border-btn;
-  color: $color-background;
-}
-
-.btn-primary:hover, .btn-default:hover {
-  background-color: $color-btn-primary-active;
-  border: $border-btn;
-  color: $color-background;
-}
-
-.btn-primary:active, .btn-default:active {
-  background-color: $color-btn-primary-active;
-  border: 1px solid $color-background;
-}
-
-.btn-primary:active:focus {
-  background-color: $color-btn-primary-active;
-  border: $border-btn;
-}
-
-button, input[type=radio], li {
-  cursor: pointer;
+.btn, button {
+  cursor: pointer !important;
 }
 
 .container {
-  margin-top: 48px;
+  border: $border-guide $color-key-blue-light;
 }
 
-.elem-answers-div {
-  background-color: $color-background;
-  font-weight: $font-weight-standard;
-  height: 180px;
-  margin-bottom: 30px;
-  overflow: scroll;
-  position: relative;
+.container#elem-container {
+  height: 60%;
+  margin-top: -20px;
 }
 
-.elem-container-border {
-  border: 0px solid $color-highlight;
+.container#main-container {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.elem-btn-blue {
+  background-color: $color-key-blue;
+  border-radius: 0% 0% 100% 0%;
+}
+
+.elem-btn-blue:active,
+.elem-btn-blue-pressed {
+  background-color: $color-key-blue-light;
+}
+
+.elem-btn {
+  border: 2px solid $color-mid;
+  cursor: pointer;
+  height: 130px;
+  outline: none;
+  width: 130px;
+}
+
+.elem-btn-red {
+  background-color: $color-key-red;
+  border-radius: 0% 100% 0% 0%;
+}
+
+.elem-btn-red:active,
+.elem-btn-red-pressed {
+  background-color: $color-key-red-light;
+}
+
+.elem-btn-yellow {
+  background-color: $color-key-yellow;
+  border-radius: 0% 0% 0% 100%
+}
+
+.elem-btn-yellow:active,
+.elem-btn-yellow-pressed {
+  background-color: $color-lightest;
+}
+
+.elem-btn-green {
+  background-color: $color-key-green;
+  border-radius: 100% 0% 0% 0%;
+}
+
+.elem-btn-green:active,
+.elem-btn-green-pressed {
+  background-color: $color-key-green-light;
+}
+
+.elem-grid-table {
+  border: $border-guide $color-darkest;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  margin-top: 1px;
   padding: 0;
+  right: 0;
+}
+
+.elem-grid-table-td {
+  border: 1px solid $color-key-blue-light;
+  padding: 0;
+  margin: 0;
+}
+
+.elem-gameboard {
+  background: $color-dark;
+  border: $border-guide $color-darkest;
+  border-radius: 50%;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2px;
+  right: 0;
+  width: 310px;
+  z-index: -1;
+}
+
+.elem-output-feedback, .elem-output-turn {
+  border: $border-guide orange;
+  margin: 0;
+  text-align: center;
+}
+
+.elem-output-turn {
+  font-size: 45px;
+  font-weight: 300;
+  padding-top: 35px;
+}
+
+.elem-output-title-screen {
+  padding-top: 120px;
+}
+
+.elem-output-game-screen {
+  padding-top: 35px;
+}
+
+.elem-output-feedback, .elem-output-score {
+  font-size: 25px;
+  font-weight: 300;
 }
 
 .elem-footer {
-  font-size: 10px;
-  padding-top: 10px;
-}
-
-.elem-h1-title-screen {
-  font-size: 40px;
+  border: $border-guide $color-key-green-light;
+  bottom: 0;
+  font-size: 7px;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  position: fixed;
+  right: 0;
   text-align: center;
 }
 
-.elem-h2-title-screen {
-  font-size: 25px;
-  font-weight: 300;
-  text-align: center;
+.elem-ui-btn {
+  border-radius: 0 !important;
 }
 
-.elem-hud-text {
-  font-size: 11px;
-}
-
-.elem-mid-div {
-  border: 0px solid $color-darkest;
-  height: 65px;
-  width: 100%; 
-}
-
-.elem-page-header {
-  border-bottom: 0px solid $color-highlight;
-  margin: 10px 0 0px;
-  padding-bottom: 9px;
-}
-
-.elem-timer {
-  padding: 0;
-  text-align: right;
-}
-
-.elem-ul-ans {
-  font-size: 14px;
-  font-weight: $font-weight-standard;
-  margin-bottom: 35px;
-}
-
-input[type=radio] {
-  margin-right: 10px;
-}
-
-li {
-  font-weight: $font-weight-standard;
-  list-style-type: none;
-  padding: 10px;
-}
-
-li:hover, tr:nth-child(even) {
-  background-color: $color-highlight;
-}
-
-.progress {
-  background-color: $color-progress;
-  height: 2px;
-}
-
-table {
-  background: none;
-}
-
-.table-results-container {
-  border-collapse: separate;
-  border-spacing: 0px;
-  font-size: 12px;
-  font-weight: $font-weight-standard;
-}
-
-.table-results-container td {
-  font-weight: $font-weight-standard;
-  height: 5px;
-  padding: 5px;
-  width: 33%;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.vertical-center {
-  vertical-align: middle;
-}
-
-
-@media (max-width: 520px) {
-  .elem-h2-title-screen {
-    font-size: 22px;
-  }
+.hud {
+  border: $border-guide $color-key-red;
+  margin-top: 5px;
+  width: 100%;
 }

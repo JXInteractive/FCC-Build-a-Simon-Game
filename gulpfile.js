@@ -127,41 +127,14 @@ gulp.task('js', function() {
   else {
     del([ dest + 'js/*' ]);
     return gulp.src([
-        source + 'js/settings/symbols.js',
-        source + 'config.js',
-        source + 'js/settings/globals.js',
-        source + 'js/components/helpers/create-element.js',
-        source + 'js/components/screens/end-screen/generate-feedback.js',
-        source + 'js/components/helpers/check-code.js',
-        source + 'js/components/helpers/toggle-ul-padding.js',
-        source + 'js/components/screens/end-screen/populate-cells.js',
-        source + 'js/components/screens/end-screen/populate-table-cells.js',
-        source + 'js/components/screens/end-screen/populate-table-header.js',
-        source + 'js/components/screens/end-screen/generate-results-table.js',
-        source + 'js/components/helpers/timer.js',
-        source + 'js/components/screens/question-screen/check-user-answered.js',
-        source + 'js/components/helpers/alert-msg.js',
-        source + 'js/components/screens/end-screen/generate-end-screen.js',
-        source + 'js/components/helpers/determine-which-screen.js',
-        source + 'js/components/screens/question-screen/submit-question.js',
-        source + 'js/components/helpers/reset.js',
-        source + 'js/components/helpers/elems-dom.js',
-        source + 'js/components/helpers/fade.js',
-        source + 'js/components/helpers/hide.js',
-        source + 'js/components/helpers/fade-in.js',
-        source + 'js/components/helpers/update-percentage-bar.js',
-        source + 'js/components/screens/question-screen/generate-question.js',
-        source + 'js/components/helpers/append-to-dom.js',
-        source + 'js/components/screens/question-screen/update-questions-correct-value.js',
-        source + 'js/components/screens/question-screen/question-set.js',
-        source + 'js/components/screens/question-screen/question-screen.js',
-        source + 'js/components/screens/title-screen/title-screen.js',
-        source + 'js/app.js'
-      ])
+      source + 'js/classes.js',
+      source + 'js/config.js',
+      source + 'js/app.js'
+    ])
       .pipe(concat(js.filename))
       .pipe(size({ title:'JS in' }))
       .pipe(es6transpiler())
-      .pipe(stripdebug())
+      //.pipe(stripdebug())
       .pipe(uglify().on('error', gutil.log))
       .pipe(minify({ ext:{ src:'-debug.js', min:'.js' }, exclude: ['tasks'], ignoreFiles: ['.combo.js', '-min.js'] }))
       .pipe(js_obfuscator({}, ["**/jquery-*.js"]))
